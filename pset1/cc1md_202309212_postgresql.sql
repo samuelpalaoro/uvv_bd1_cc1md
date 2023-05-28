@@ -68,7 +68,7 @@ COMMENT ON COLUMN produto.produto_id IS 'Coluna que contém a pk da tabela produ
 COMMENT ON COLUMN produto.nome IS 'armazena os nomes ';
 COMMENT ON COLUMN produtos.preco_unitario IS 'armazena os precos unitarios';
 COMMENT ON COLUMN produtos.detalhes IS 'armazena os detalhes ';
-COMMENT ON COLUMN produtos.imagem IS 'armazena as imagens;
+COMMENT ON COLUMN produtos.imagem IS 'armazena as imagens';
 COMMENT ON COLUMN produtos.imagem_mime_type IS 'armazena  imagens';
 COMMENT ON COLUMN produtos.imagem_arquivo IS 'armazena  imagens arquivo';
 COMMENT ON COLUMN produtos.imagem_charset IS 'armazena  imagens charset';
