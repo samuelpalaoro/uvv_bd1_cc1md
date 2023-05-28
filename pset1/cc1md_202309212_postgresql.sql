@@ -279,3 +279,28 @@ REFERENCES envio (envio_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
+
+-- adicionando as CONSTRAINTS --
+
+--Status_pedidos podem somente possuir os seguintes parametros'
+ALTER TABLE pedidos		
+ADD CONSTRAINT pedidos.status	CHECK (status IN ('cancelado', 'aberto', 'pago', 'completo', 'enviado', 'enviado'));
+
+--Status_envios podem somente possuir os seguintes parametros'
+ALTER TABLE	envio		
+ADD CONSTRAINT envio.status CHECK (status IN('criado', 'transito', 'entregue', 'enviado'));
+
+--preco unitario pode somente possuir os seguintes parametros'
+
+ALTER TABLE	pedidos_itens 	
+ADD CONSTRAINT pedidositens.preco_unitario CHECK (preco_unitario > 0);
+
+--quantidade pode somente possuir os seguintes parametros'
+
+ALTER TABLE	estoques	
+ADD CONSTRAINT estoques.quantidade CHECK (quantidade > 0);
+
+--Status_pedidos podem somente possuir os seguintes parametros'
+
+ALTER TABLE	produtos	
+ADD CONSTRAINT preco_unitario	CHECK (preco_unitario > 0);
