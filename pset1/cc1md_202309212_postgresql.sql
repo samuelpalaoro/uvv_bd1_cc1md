@@ -59,10 +59,10 @@ CREATE TABLE produto (
                 imagem_ultima_atualizacao DATE        NOT NULL,
                 CONSTRAINT pk_produto PRIMARY KEY (produto_id)
 );
-/*comentario da tabela/* 
+/*comentario da tabela*/
 COMMENT ON TABLE produto IS 'tabelas referente aos produtos das lojas uvv';
 
-/*comentarios das colunas/*
+/*comentarios das colunas*/
 COMMENT ON COLUMN produto.produto_id IS 'Coluna que contém a pk da tabela produto';
 COMMENT ON COLUMN produto.nome IS 'armazena os nomes ';
 COMMENT ON COLUMN produtos.preco_unitario IS 'armazena os precos unitarios';
@@ -73,7 +73,7 @@ COMMENT ON COLUMN produtos.imagem_arquivo IS 'armazena  imagens arquivo';
 COMMENT ON COLUMN produtos.imagem_charset IS 'armazena  imagens charset';
 COMMENT ON COLUMN produtos.imagem_ultima_atualizacao IS 'armazena  imagens atualizadas';
 
-/*criacao da tabela clientes/*
+/*criacao da tabela clientes*/
 
 CREATE TABLE cliente (
                 cliente_id NUMERIC(38) NOT NULL,
@@ -84,11 +84,11 @@ CREATE TABLE cliente (
                 telefone3 VARCHAR(20) NOT NULL,
                 CONSTRAINT pk_clientes PRIMARY KEY (cliente_id)
 );
-/*comentario da tabela/*
+/*comentario da tabela*/
 
 COMMENT ON TABLE cliente IS 'tabela referente a clientes das lojas uvv';
 
-/*comentarios das colunas/*
+/*comentarios das colunas*/
 COMMENT ON COLUMN  cliente.cliente_id IS 'coluna referente a pk da tabela clientes';
 COMMENT ON COLUMN  cliente.email IS 'armazena os emails dos clientes';
 COMMENT ON COLUMN  cliente.nome IS 'armazena os nomes dos clientes';
@@ -96,7 +96,7 @@ COMMENT ON COLUMN  cliente.telefone1 IS'armazena o telefone principal do cliente
 COMMENT ON COLUMN  cliente.telefone2 IS 'armazena o telefone secundario do cliente';
 COMMENT ON COLUMN  cliente.telefone3 IS 'armazena o telefone terciario do cliente';
 
-/*criacao da tabela loja/*
+/*criacao da tabela loja*/
 
 CREATE TABLE loja (
                 loja_id NUMERIC(38) NOT NULL,
@@ -112,11 +112,11 @@ CREATE TABLE loja (
                 logo_ultima_atualizacao DATE NOT NULL,
                 CONSTRAINT pk_lojas PRIMARY KEY (loja_id)
 );
-/*comentario da tabela/*
+/*comentario da tabela*/
 
 COMMENT ON TABLE loja IS 'tabela referente as lojas uvv';
 
-/*comentarios das colunas/*
+/*comentarios das colunas*/
 
 COMMENT ON COLUMN    loja.loja_id IS 'coluna referente a pk da tabela loja';
 COMMENT ON COLUMN    loja.nome IS 'armazena o nome da loja ';
@@ -141,11 +141,11 @@ CREATE TABLE pedidos (
                 loja_id NUMERIC(38) NOT NULL,
                 CONSTRAINT pk_pedidos PRIMARY KEY (pedido_id)
 );
-/*comentario da tabela/*
+/*comentario da tabela*/
 
 COMMENT ON TABLE pedidos IS 'tabela referente  a pedidos das lojas uvv';
 
-/*comentarios das colunas/*
+/*comentarios das colunas*/
 
 COMMENT ON COLUMN pedidos.pedido_id  IS 'Coluna que contém a pk da tabela pedidos';
 COMMENT ON COLUMN pedidos.data_hora  IS 'armazena a data e hora';
@@ -160,11 +160,11 @@ CREATE TABLE estoque (
                 quantidade NUMERIC(38) NOT NULL,
                 CONSTRAINT pk_estoques PRIMARY KEY (estoque_id)
 );
-/*comentario da tabela/*
+/*comentario da tabela*/
 
 COMMENT ON TABLE estoque IS 'tabela referente ao estoque das lojas uvv';
 
-/*comentarios das colunas/*
+/*comentarios das colunas*/
 
 COMMENT ON COLUMN estoque.estoque_id  IS 'Coluna que contém a pk da tabela estoque';
 COMMENT ON COLUMN estoque.loja_id  IS 'coluna que contem a fk da tabela loja';
@@ -180,11 +180,11 @@ CREATE TABLE envio (
                 status VARCHAR(15) NOT NULL,
                 CONSTRAINT pk_envios PRIMARY KEY (envio_id)
 );
-/*comentario da tabela/*
+/*comentario da tabela*/
 
 COMMENT ON TABLE envio IS 'tabela referente a pedidos das lojas uvv';
 
-/*comentarios das colunas/*
+/*comentarios das colunas*/
 
 COMMENT ON COLUMN envio.envio_id  IS 'Coluna que contém a pk da tabela envio';
 COMMENT ON COLUMN envio.loja_id  IS 'coluna que contem a fk da tabela loja';
@@ -205,7 +205,7 @@ CREATE TABLE pedidositens (
 
 COMMENT ON TABLE pedidositens IS 'tabela referente aos pedidos dos itens das lojas uvv';
 
-/*comentarios das colunas/*
+/*comentarios das colunas*/
 
 COMMENT ON COLUMN pedidositens.pedido_id  IS 'Coluna que contém a pfk, envios, produtos e pedidos';
 COMMENT ON COLUMN pedidositens.produto_id  IS 'coluna que contem a pfk, envios, produtos e pedidos ';
@@ -279,27 +279,27 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-/* adicionando as CONSTRAINTS /*
+/* adicionando as CONSTRAINTS */
 
-/*Status_pedidos podem somente possuir os seguintes parametros/*
+/*Status_pedidos podem somente possuir os seguintes parametros*/
 ALTER TABLE pedidos		
 ADD CONSTRAINT pedidos.status	CHECK (status IN ('cancelado', 'aberto', 'pago', 'completo', 'enviado', 'enviado'));
 
-/*Status_envios podem somente possuir os seguintes parametros/*
+/*Status_envios podem somente possuir os seguintes parametros*/
 ALTER TABLE	envio		
 ADD CONSTRAINT envio.status CHECK (status IN('criado', 'transito', 'entregue', 'enviado'));
 
-/*preco unitario pode somente possuir os seguintes parametros/*
+/*preco unitario pode somente possuir os seguintes parametros*/
 
 ALTER TABLE	pedidos_itens 	
 ADD CONSTRAINT pedidositens.preco_unitario CHECK (preco_unitario > 0);
 
-/*quantidade pode somente possuir os seguintes parametros/*
+/*quantidade pode somente possuir os seguintes parametros*/
 
 ALTER TABLE	estoques	
 ADD CONSTRAINT estoques.quantidade CHECK (quantidade > 0);
 
-/*Status_pedidos podem somente possuir os seguintes parametros/*
+/*Status_pedidos podem somente possuir os seguintes parametros*/
 
 ALTER TABLE	produtos	
 ADD CONSTRAINT produtos.preco_unitario	CHECK (preco_unitario > 0);
