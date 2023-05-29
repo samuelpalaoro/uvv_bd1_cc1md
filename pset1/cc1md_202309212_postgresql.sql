@@ -151,7 +151,7 @@ COMMENT ON COLUMN pedidos.pedido_id  IS 'Coluna que contém a pk da tabela pedid
 COMMENT ON COLUMN pedidos.data_hora  IS 'armazena a data e hora';
 COMMENT ON COLUMN pedidos.cliente_id  IS 'coluna que contem a fk da tabela clientes';
 COMMENT ON COLUMN pedidos.status     IS 'armazena os status dos pedidos ';
-COMMENT ON COLUMN pedidos.loja_id    IS 'coluna que contem a fk da tabela loja;
+COMMENT ON COLUMN pedidos.loja_id    IS 'coluna que contem a fk da tabela loja';
 
 CREATE TABLE estoque (
                 estoque_id NUMERIC(38) NOT NULL,
