@@ -303,4 +303,4 @@ ADD CONSTRAINT estoques.quantidade CHECK (quantidade > 0);
 --Status_pedidos podem somente possuir os seguintes parametros'
 
 ALTER TABLE	produtos	
-ADD CONSTRAINT preco_unitario	CHECK (preco_unitario > 0);
+ADD CONSTRAINT produtos.preco_unitario	CHECK (preco_unitario > 0);
