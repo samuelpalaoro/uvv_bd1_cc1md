@@ -201,7 +201,7 @@ CREATE TABLE pedidositens (
                 envio_id NUMERIC(38) NOT NULL,
                 CONSTRAINT pk_pedido_itens PRIMARY KEY (pedido_id, produto_id)
 );
-/*comentario da tabela/*
+/*comentario da tabela*/
 
 COMMENT ON TABLE pedidositens IS 'tabela referente aos pedidos dos itens das lojas uvv';
 
