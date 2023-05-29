@@ -28,7 +28,7 @@ ALLOW_CONNECTIONS =                      true
 
 -- Comentario do banco de dados--
 COMMENT ON DATABASE                               uvv
-is                                               'banco de dados referente as lojas uvv'
+IS                                               'banco de dados referente as lojas uvv'
 
 
 --conexao entre o ususario e o banco de dados atual--
