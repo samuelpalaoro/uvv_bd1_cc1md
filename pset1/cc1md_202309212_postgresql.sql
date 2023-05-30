@@ -1,4 +1,3 @@
-
 /* Comando para exclusão do banco de dados de existente */
 
 DROP DATABASE IF EXISTS  uvv;
@@ -13,6 +12,7 @@ ENCRYPTED PASSWORD                    'senha123'
                                         CREATEDB
                                       CREATEROLE
                                           LOGIN
+;
                                           
 /* Comando para criação do banco de dados e conexão do mesmo */
 
@@ -32,22 +32,23 @@ IS                                               'banco de dados referente as lo
 
 /* conexao entre o ususario e o banco de dados atual */
   \c "host=localhost dbname=uvv user=samuel password=senha123"
+;
   
 /* criaçao do esquema e conexao com o usuario samuel*/
 
-CREATE                                 SCHEMA lojas;
-ALTER                                  SCHEMA lojas OWNER TO samuel;
+CREATE   SCHEMA lojas;
+ALTER    SCHEMA lojas OWNER TO samuel;
 
-COMMENT ON SCHEMA                     'esquematizacao lojas uvv';
+COMMENT ON SCHEMA lojas            is        'esquematizacao lojas uvv';
 /* configura o esquema incial para o usuario samuel*/
-
+SET SEARCH_PATH TO lojas,            "$user", public;
 ALTER USER                           samuel
 SET SEARCH_PATH TO lojas,            "$user", public;
 
 /* criacao da tabela produtos*/
 
 
-CREATE TABLE produto (
+CREATE TABLE produtos (
                 produto_id NUMERIC(38)             NOT NULL,
                 nome VARCHAR(255)                  NOT NULL,
                 preco_unitario NUMERIC(10,2)       NOT NULL,
@@ -60,11 +61,11 @@ CREATE TABLE produto (
                 CONSTRAINT pk_produto PRIMARY KEY (produto_id)
 );
 /*comentario da tabela*/
-COMMENT ON TABLE produto IS 'tabelas referente aos produtos das lojas uvv';
+COMMENT ON TABLE produtos IS 'tabelas referente aos produtos das lojas uvv';
 
 /*comentarios das colunas*/
-COMMENT ON COLUMN produto.produto_id IS 'Coluna que contém a pk da tabela produto';
-COMMENT ON COLUMN produto.nome IS 'armazena os nomes ';
+COMMENT ON COLUMN produtos.produto_id IS 'Coluna que contém a pk da tabela produto';
+COMMENT ON COLUMN produtos.nome IS 'armazena os nomes ';
 COMMENT ON COLUMN produtos.preco_unitario IS 'armazena os precos unitarios';
 COMMENT ON COLUMN produtos.detalhes IS 'armazena os detalhes ';
 COMMENT ON COLUMN produtos.imagem IS 'armazena as imagens';
@@ -218,14 +219,14 @@ COMMENT ON COLUMN pedidositens.envio_id  IS 'coluna que contem a fk da tabela en
 
 ALTER TABLE estoque ADD CONSTRAINT produtos_estoques_fk
 FOREIGN KEY (produto_id)
-REFERENCES produto (produto_id)
+REFERENCES produtos (produto_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE pedidositens ADD CONSTRAINT produtos_pedidos_itens_fk
 FOREIGN KEY (produto_id)
-REFERENCES produto (produto_id)
+REFERENCES produtos (produto_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -283,23 +284,23 @@ NOT DEFERRABLE;
 
 /*Status_pedidos podem somente possuir os seguintes parametros*/
 ALTER TABLE pedidos		
-ADD CONSTRAINT pedidos.status	CHECK (status IN ('cancelado', 'aberto', 'pago', 'completo', 'enviado', 'enviado'));
+ADD CONSTRAINT status	CHECK (status IN ('cancelado', 'aberto', 'pago', 'completo', 'enviado', 'enviado'));
 
 /*Status_envios podem somente possuir os seguintes parametros*/
 ALTER TABLE	envio		
-ADD CONSTRAINT envio.status CHECK (status IN('criado', 'transito', 'entregue', 'enviado'));
+ADD CONSTRAINT status CHECK (status IN('criado', 'transito', 'entregue', 'enviado'));
 
 /*preco unitario pode somente possuir os seguintes parametros*/
 
-ALTER TABLE	pedidos_itens 	
-ADD CONSTRAINT pedidositens.preco_unitario CHECK (preco_unitario > 0);
+ALTER TABLE	pedidositens 	
+ADD CONSTRAINT preco_unitario CHECK (preco_unitario > 0);
 
 /*quantidade pode somente possuir os seguintes parametros*/
 
-ALTER TABLE	estoques	
-ADD CONSTRAINT estoques.quantidade CHECK (quantidade > 0);
+ALTER TABLE	estoque	
+ADD CONSTRAINT quantidade CHECK (quantidade > 0);
 
 /*Status_pedidos podem somente possuir os seguintes parametros*/
 
 ALTER TABLE	produtos	
-ADD CONSTRAINT produtos.preco_unitario	CHECK (preco_unitario > 0);
+ADD CONSTRAINT preco_unitario	CHECK (preco_unitario > 0);
