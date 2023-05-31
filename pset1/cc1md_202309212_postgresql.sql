@@ -1,3 +1,4 @@
+/* Samuel Palaoro 202309212 CC1MD */
 /* Comando para exclusão do banco de dados de existente */
 
 DROP DATABASE IF EXISTS  uvv;
